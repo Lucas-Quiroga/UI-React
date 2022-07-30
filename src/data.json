@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "task": "aprender Kubernetes",
+    "completed": false
+  },
+  {
+    "id": 2,
+    "task": "aprender React Native",
+    "completed": false
+  },
+  {
+    "id": 3,
+    "task": "aprender Phyton",
+    "completed": false
+  },
+  {
+    "id": 4,
+    "task": "aprender NextJS",
+    "completed": true
+  }
+]
