@@ -1,53 +1,75 @@
 import React, { useEffect, useState } from "react";
 import "./Login.css";
+import firebaseApp from "../../Firebase/config";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signInWithRedirect,
+  GoogleAuthProvider,
+} from "firebase/auth";
+const auth = getAuth(firebaseApp);
+const googleProvider = new GoogleAuthProvider();
 
 const Login = () => {
-  const [userLogin, setUserLogin] = useState({});
+  // const [userLogin, setUserLogin] = useState({});
+  const [userRegistering, setUserRegistering] = useState(false);
 
-  const handle_form = () => {
-    alert("te estas logeando");
-  };
+  async function handleForm(e) {
+    e.preventDefault();
+    const email = e.target.formBasicEmail.value;
+    const password = e.target.formBasicPassword.value;
 
-  const handleChange = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    setUserLogin((values) => ({ ...values, [name]: value }));
-  };
+    if (userRegistering) {
+      const user = await createUserWithEmailAndPassword(auth, email, password);
+    } else {
+      signInWithEmailAndPassword(auth, email, password);
+    }
+  }
 
-  console.log(userLogin);
   return (
     <>
       <div className="login-box">
-        <h2>Login</h2>
-        <form onSubmit={handle_form}>
+        <h1>{userRegistering ? "Register" : "login"}</h1>
+        <form onSubmit={handleForm}>
           <div className="user-box">
             <input
-              type="text"
-              name="username"
+              type="email"
+              placeholder="Enter email"
               required=""
-              onChange={handleChange}
-              value={userLogin.username || ""}
+              name="formBasicEmail"
+              id="formBasicEmail"
             />
-            <label>Username</label>
+            <label>Email</label>
           </div>
           <div className="user-box">
             <input
               type="password"
-              name="password"
+              placeholder="Enter password"
               required=""
-              onChange={handleChange}
-              value={userLogin.password || ""}
+              name="formBasicPasswor"
+              id="formBasicPassword"
             />
             <label>Password</label>
           </div>
-          <a href="#" onClick={handle_form}>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            Submit
-          </a>
+          <button type="submit">
+            {userRegistering ? "Register" : "login"}
+          </button>
         </form>
+        <button
+          type="submit"
+          onClick={() => signInWithRedirect(auth, googleProvider)}
+        >
+          login with google
+        </button>
+        <button
+          type="submit"
+          onClick={() => setUserRegistering(!userRegistering)}
+        >
+          {userRegistering
+            ? "already have an account? log in"
+            : "don't have an account? register"}
+        </button>
       </div>
     </>
   );

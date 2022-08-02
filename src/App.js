@@ -1,15 +1,29 @@
 import "./App.css";
 import Landing from "./Components/Landing/Landing";
-import RegisterUser from "./Components/Register/Register";
-import { useUser } from "react-fire";
+// import RegisterUser from "./Components/Register/Register";
+import React, { useState, useEffect } from "react";
+import Home from "./Components/Home/Home";
+import Login from "./Components/Login/Login";
+import firebaseApp from "./Firebase/config";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+const auth = getAuth(firebaseApp);
 
 function App() {
-  const user = useUser();
+  const [userGlobal, setUserGlobal] = useState(null);
+
+  onAuthStateChanged(auth, (userFirebase) => {
+    if (userFirebase) {
+      setUserGlobal(userFirebase);
+    } else {
+      setUserGlobal(null);
+    }
+  });
+
   return (
     <div className="App">
-      {user && <p>Usuario: {user.email}</p>}
-      <Landing />
-      <RegisterUser />
+      {userGlobal ? <Home /> : <Landing />}
+
+      {/* <RegisterUser /> */}
     </div>
   );
 }
