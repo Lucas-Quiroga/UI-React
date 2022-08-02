@@ -12,17 +12,20 @@ const auth = getAuth(firebaseApp);
 const googleProvider = new GoogleAuthProvider();
 
 const Login = () => {
-  // const [userLogin, setUserLogin] = useState({});
+  // estado que nos dice si el usuario se está registrando o no
   const [userRegistering, setUserRegistering] = useState(false);
 
+  //agarra los datos de los inputs y actualiza el estado o para crear un usuario o para logear el usuario
   async function handleForm(e) {
     e.preventDefault();
     const email = e.target.formBasicEmail.value;
     const password = e.target.formBasicPassword.value;
 
     if (userRegistering) {
+      //si se registra el usuario
       const user = await createUserWithEmailAndPassword(auth, email, password);
     } else {
+      //si logea el usuario
       signInWithEmailAndPassword(auth, email, password);
     }
   }
@@ -58,6 +61,7 @@ const Login = () => {
         </form>
         <button
           type="submit"
+          // con la funcion llamamos al provedor que queres en este caso es google
           onClick={() => signInWithRedirect(auth, googleProvider)}
         >
           login with google

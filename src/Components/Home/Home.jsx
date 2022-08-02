@@ -8,6 +8,7 @@ const Home = () => {
   return (
     <div>
       <h4>Hola, iniciaste sesion</h4>
+      {/* con el boton usamos la funcion para cerrar sesion */}
       <button onClick={() => signOut(auth)}>cerrar sesion</button>
     </div>
   );
