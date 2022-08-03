@@ -1,0 +1,21 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+
+.landing_box{
+    height: 55em;
+    width: 110em;
+    background-color: black;
+    border-radius:100px 100px 100px 100px;
+    justify-content: center;
+    margin: 0 auto;
+    position: relative;
+    top: 2.5em;
+    
+    border-style: solid;
+    background: rgb(119,6,176);
+background: linear-gradient(90deg, rgba(119,6,176,1) 0%, rgba(0,212,255,1) 100%, rgba(2,0,36,1) 100%);
+}
