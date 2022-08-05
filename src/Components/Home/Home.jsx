@@ -37,12 +37,11 @@ const Home = ({ correoUser }) => {
   //   fetchTasks();
   // }, []);
 
-  // const userDb = {
-  //   userLogin: {
-  //     email: correoUser
-  //   }
-  //   tasks:
-  // }
+  useEffect(() => {
+    const queryDb = getFirestore();
+    const queryDoc = doc(queryDb, "Users", correoUser);
+    getDoc(queryDoc).then((res) => setUser({ id: res.id, ...res.data() }));
+  }, []);
 
   return (
     <div>
