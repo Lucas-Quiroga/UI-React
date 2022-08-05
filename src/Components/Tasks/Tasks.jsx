@@ -24,10 +24,10 @@ export default function Tasks() {
   };
 
   const addTask = (newTask) => {
-    console.log('newTask', newTask)
-    let newItem = {id: +new Date(), task: newTask, completed: false}
-    setTasks([...tasks, newItem])
-  }
+    console.log("newTask", newTask);
+    let newItem = { id: +new Date(), task: newTask, completed: false };
+    setTasks([...tasks, newItem]);
+  };
 
   return (
     <div className="container">

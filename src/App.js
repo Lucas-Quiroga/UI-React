@@ -24,7 +24,7 @@ function App() {
   return (
     <div className="App">
       {/* lo que mostramos en el estado cuando se actualice el usuario*/}
-      {userGlobal ? <Home /> : <Landing />}
+      {userGlobal ? <Home correoUser={userGlobal.email} /> : <Landing />}
     </div>
   );
 }
