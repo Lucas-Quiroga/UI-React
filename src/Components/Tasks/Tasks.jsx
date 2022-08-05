@@ -1,10 +1,12 @@
 import React from "react";
 import { useState } from "react";
-import data from "../../data.json";
+// import data from "../../data.json";
 import TasksList from "./TasksList";
 import TaskForm from "./TaskForm";
 
 export default function Tasks() {
+  const data = [];
+
   const [tasks, setTasks] = useState(data);
   const onComplete = (id) => {
     console.log("task", id);
